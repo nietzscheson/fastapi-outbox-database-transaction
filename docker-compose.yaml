@@ -1,0 +1,30 @@
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+    volumes:
+      - ./:/app
+    ports:
+      - 8000:8000
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+  db:
+    container_name: db
+    image: postgres:13.2
+    restart: unless-stopped
+    volumes:
+      - /var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock
+      - db-volume:/var/lib/postgresql/data
+    ports:
+        - 5432:5432
+    environment:
+        POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-volume:
