@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "outbox-event-database-transaction"
+version = "0.1.0"
+description = "Outbox Event Database Transaction with Python, Debezium & Pub/Sub"
+authors = ["Cristian Angulo Nova <cristianangulonova@gmail.com>"]
+readme = "README.md"
+packages = [{include = "outbox_event_database_transaction"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = {extras = ["async"], version = "^2.0.18"}
+alembic = "^1.11.1"
+pydantic = "^2.0.2"
+pydantic-settings = "^2.0.1"
+psycopg2 = "^2.9.6"
+faker = "^18.13.0"
+factory-boy = "^3.2.1"
+click = "^8.1.4"
+typer = "^0.9.0"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+filterwarnings = "error"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
